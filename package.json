@@ -1,0 +1,50 @@
+{
+  "name": "getdents",
+  "description": "Call getdents(2) from Javscript",
+  "version": "0.0.1",
+  "homepage": "https://github.com/davedoesdev/getdents",
+  "author": {
+    "name": "David Halls",
+    "email": "dave@davedoesdev.com",
+    "url": "http://www.davedoesdev.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davedoesdev/getdents.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davedoesdev/getdents/issues"
+  },
+  "license": "MIT",
+  "main": "lib/getdents.js",
+  "scripts": {
+    "test": "node --napi-modules ./node_modules/.bin/grunt lint test",
+    "ci-coverage": "node --napi-modules ./node_modules/.bin/grunt lint coverage codecov"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": [
+    "getdents",
+    "readdir"
+  ],
+  "dependencies": {
+    "bindings": "~1.3.0",
+    "node-addon-api": "davedoesdev/node-addon-api#fix-objectwrap-crash"
+  },
+  "devDependencies": {
+    "grunt": "~1.0.1",
+    "grunt-contrib-jshint": "~1.1.0",
+    "grunt-exec": "~3.0.0",
+    "grunt-mocha-test": "~0.13.2",
+    "mocha": "~3.5.0",
+    "chai": "~4.1.2",
+    "nyc": "~11.1.0",
+    "codecov": "~2.3.0",
+    "documentation": "~5.3.1"
+  },
+  "engines": {
+    "node": ">=8.4.0"
+  }
+}

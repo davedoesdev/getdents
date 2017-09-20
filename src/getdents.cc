@@ -1,0 +1,166 @@
+#include <unistd.h>
+#include <sys/syscall.h>
+#include <dirent.h>
+#include <napi.h>
+
+class Getdents : public Napi::ObjectWrap<Getdents>
+{
+public:
+    Getdents(const Napi::CallbackInfo& info);
+    ~Getdents();
+
+    static void Initialize(Napi::Env env, Napi::Object exports);
+
+    void Next(const Napi::CallbackInfo& info);
+    Napi::Value NextSync(const Napi::CallbackInfo& info);
+
+    Napi::Value GetFD(const Napi::CallbackInfo& info);
+
+private:
+	friend class GetdentsAsyncWorker;
+
+    int NextSync(uint8_t *dirp, unsigned int count);
+
+    unsigned int fd;
+};
+
+Getdents::Getdents(const Napi::CallbackInfo& info) :
+    Napi::ObjectWrap<Getdents>(info)
+{
+    fd = info[0].As<Napi::Number>();
+}
+
+Napi::Error ErrnoError(const Napi::Env& env, const int errnum, const char *msg)
+{
+    char buf[1024] = {0};
+    auto errmsg = strerror_r(errnum, buf, sizeof(buf));
+    static_assert(std::is_same<decltype(errmsg), char*>::value,
+                  "strerror_r must return char*");
+    return Napi::Error::New(env,
+        std::string(msg) + ": " + (errmsg ? errmsg : std::to_string(errnum)));
+}
+
+Napi::Error GetdentsErrnoError(const Napi::Env& env, const int errnum)
+{
+    return ErrnoError(env, errnum, "getdents64 failed");
+}
+
+int Getdents::NextSync(uint8_t *dirp, unsigned int count)
+{
+	return syscall(SYS_getdents64, fd, dirp, count);
+}
+
+Napi::Value Getdents::NextSync(const Napi::CallbackInfo& info)
+{
+    Napi::Buffer<uint8_t> b = info[0].As<Napi::Buffer<uint8_t>>();
+    int r = NextSync(b.Data(), b.Length());
+    if (r < 0)
+    {
+        throw GetdentsErrnoError(info.Env(), errno);
+    }
+    return Napi::Number::New(info.Env(), r);
+}
+
+class GetdentsAsyncWorker : public Napi::AsyncWorker
+{
+public:
+    GetdentsAsyncWorker(Getdents *getdents,
+                        const Napi::Function& callback,
+                        const Napi::Buffer<uint8_t>& buffer) :
+        Napi::AsyncWorker(callback),
+		getdents(getdents), // getdents_ref keeps this around
+		getdents_ref(Napi::Persistent(getdents->Value())),
+        buffer_ref(Napi::Persistent(buffer)),
+        dirp(buffer.Data()),
+        count(buffer.Length())
+	{
+	}
+
+protected:
+    void Execute() override
+    {
+        result = getdents->NextSync(dirp, count);
+        if (result < 0)
+        {
+            errnum = errno;
+        }
+    }
+
+	void OnOK() override
+	{
+		Napi::Env env = Env();
+
+		Callback().MakeCallback(
+			Receiver().Value(),
+			std::initializer_list<napi_value>
+			{
+				result < 0 ? GetdentsErrnoError(env, errnum).Value() : env.Null(),
+				Napi::Number::New(env, result)
+			});
+	}
+
+private: Getdents *getdents;
+	Napi::ObjectReference getdents_ref;
+    Napi::Reference<Napi::Buffer<uint8_t>> buffer_ref;
+    uint8_t *dirp;
+    unsigned int count;
+	int result;
+    int errnum;
+};
+
+void NullCallback(const Napi::CallbackInfo& info)
+{
+}
+
+Napi::Function GetCallback(const Napi::CallbackInfo& info, uint32_t cb_arg)
+{
+    if (info.Length() > cb_arg)
+    {
+        Napi::Value cb = info[cb_arg];
+        if (cb.IsFunction())
+        {
+            return cb.As<Napi::Function>();
+        }
+    }
+
+    return Napi::Function::New(info.Env(), NullCallback);
+}
+
+void Getdents::Next(const Napi::CallbackInfo& info)
+{
+    (new GetdentsAsyncWorker(this,
+							 GetCallback(info, 1),
+							 info[0].As<Napi::Buffer<uint8_t>>()))
+		->Queue();
+}
+
+Napi::Value Getdents::GetFD(const Napi::CallbackInfo& info)
+{
+    return Napi::Number::New(info.Env(), fd);
+}
+
+void Getdents::Initialize(Napi::Env env, Napi::Object exports)
+{
+    exports.Set("Getdents", DefineClass(env, "Getdents",
+    {
+        InstanceMethod("_next", &Getdents::Next),
+        InstanceMethod("_nextSync", &Getdents::NextSync),
+        InstanceAccessor("fd", &Getdents::GetFD, nullptr),
+        StaticValue("DT_BLK", Napi::Number::New(env, DT_BLK)),
+        StaticValue("DT_CHR", Napi::Number::New(env, DT_CHR)),
+        StaticValue("DT_DIR", Napi::Number::New(env, DT_DIR)),
+        StaticValue("DT_FIFO", Napi::Number::New(env, DT_FIFO)),
+        StaticValue("DT_LNK", Napi::Number::New(env, DT_LNK)),
+        StaticValue("DT_REG", Napi::Number::New(env, DT_REG)),
+        StaticValue("DT_SOCK", Napi::Number::New(env, DT_SOCK)),
+        StaticValue("DT_UNKNOWN", Napi::Number::New(env, DT_UNKNOWN))
+    }));
+}
+
+void Initialize(Napi::Env env, Napi::Object exports, Napi::Object module)
+{
+    Getdents::Initialize(env, exports);
+	// export DT_* constants so can filter in JS
+}
+
+NODE_API_MODULE(getdents, Initialize)
