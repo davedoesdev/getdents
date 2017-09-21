@@ -143,8 +143,8 @@ void Getdents::Initialize(Napi::Env env, Napi::Object exports)
 {
     exports.Set("Getdents", DefineClass(env, "Getdents",
     {
-        InstanceMethod("_next", &Getdents::Next),
-        InstanceMethod("_nextSync", &Getdents::NextSync),
+        InstanceMethod("next", &Getdents::Next),
+        InstanceMethod("nextSync", &Getdents::NextSync),
         InstanceAccessor("fd", &Getdents::GetFD, nullptr),
         StaticValue("DT_BLK", Napi::Number::New(env, DT_BLK)),
         StaticValue("DT_CHR", Napi::Number::New(env, DT_CHR)),
@@ -153,7 +153,8 @@ void Getdents::Initialize(Napi::Env env, Napi::Object exports)
         StaticValue("DT_LNK", Napi::Number::New(env, DT_LNK)),
         StaticValue("DT_REG", Napi::Number::New(env, DT_REG)),
         StaticValue("DT_SOCK", Napi::Number::New(env, DT_SOCK)),
-        StaticValue("DT_UNKNOWN", Napi::Number::New(env, DT_UNKNOWN))
+        StaticValue("DT_UNKNOWN", Napi::Number::New(env, DT_UNKNOWN)),
+        StaticValue("alignment", Napi::Number::New(env, __alignof__(struct dirent)))
     }));
 }
 
