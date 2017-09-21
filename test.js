@@ -16,7 +16,7 @@ function print_filenames(getdents)
 fs.open('build', 'r', function (err, fd)
 {
     assert.ifError(err);
-    let getdents = new Getdents(fd, 1024 * 1024);
+    let getdents = new Getdents(1024 * 1024, fd);
     while (getdents.moreSync())
     {
         print_filenames(getdents);
@@ -27,7 +27,7 @@ fs.open('build', 'r', function (err, fd)
 fs.open('build', 'r', function (err, fd)
 {
     assert.ifError(err);
-    let getdents = new Getdents(fd, 1024 * 1024);
+    let getdents = new Getdents(1024 * 1024, fd);
     getdents.more(function more(err, ended)
     {
         assert.ifError(err);

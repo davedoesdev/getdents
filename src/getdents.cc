@@ -15,6 +15,7 @@ public:
     Napi::Value NextSync(const Napi::CallbackInfo& info);
 
     Napi::Value GetFD(const Napi::CallbackInfo& info);
+    void SetFD(const Napi::CallbackInfo& info, const Napi::Value& value);
 
 private:
 	friend class GetdentsAsyncWorker;
@@ -25,9 +26,9 @@ private:
 };
 
 Getdents::Getdents(const Napi::CallbackInfo& info) :
-    Napi::ObjectWrap<Getdents>(info)
+    Napi::ObjectWrap<Getdents>(info),
+    fd(0)
 {
-    fd = info[0].As<Napi::Number>();
 }
 
 Napi::Error ErrnoError(const Napi::Env& env, const int errnum, const char *msg)
@@ -139,13 +140,18 @@ Napi::Value Getdents::GetFD(const Napi::CallbackInfo& info)
     return Napi::Number::New(info.Env(), fd);
 }
 
+void Getdents::SetFD(const Napi::CallbackInfo& info, const Napi::Value& value)
+{
+    fd = value.As<Napi::Number>();
+}
+
 void Getdents::Initialize(Napi::Env env, Napi::Object exports)
 {
     exports.Set("Getdents", DefineClass(env, "Getdents",
     {
         InstanceMethod("next", &Getdents::Next),
         InstanceMethod("nextSync", &Getdents::NextSync),
-        InstanceAccessor("fd", &Getdents::GetFD, nullptr),
+        InstanceAccessor("fd", &Getdents::GetFD, &Getdents::SetFD),
         StaticValue("DT_BLK", Napi::Number::New(env, DT_BLK)),
         StaticValue("DT_CHR", Napi::Number::New(env, DT_CHR)),
         StaticValue("DT_DIR", Napi::Number::New(env, DT_DIR)),
@@ -161,7 +167,6 @@ void Getdents::Initialize(Napi::Env env, Napi::Object exports)
 void Initialize(Napi::Env env, Napi::Object exports, Napi::Object module)
 {
     Getdents::Initialize(env, exports);
-	// export DT_* constants so can filter in JS
 }
 
 NODE_API_MODULE(getdents, Initialize)
