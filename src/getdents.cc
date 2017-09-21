@@ -7,7 +7,6 @@ class Getdents : public Napi::ObjectWrap<Getdents>
 {
 public:
     Getdents(const Napi::CallbackInfo& info);
-    ~Getdents();
 
     static void Initialize(Napi::Env env, Napi::Object exports);
 
