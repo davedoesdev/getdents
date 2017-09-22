@@ -7,6 +7,7 @@ class Getdents : public Napi::ObjectWrap<Getdents>
 {
 public:
     Getdents(const Napi::CallbackInfo& info);
+    ~Getdents();
 
     static void Initialize(Napi::Env env, Napi::Object exports);
 
@@ -29,6 +30,12 @@ Getdents::Getdents(const Napi::CallbackInfo& info) :
     fd(0)
 {
 }
+
+//LCOV_EXCL_START
+Getdents::~Getdents()
+{
+}
+//LCOV_EXCL_STOP
 
 Napi::Error ErrnoError(const Napi::Env& env, const int errnum, const char *msg)
 {
@@ -108,28 +115,10 @@ private: Getdents *getdents;
     int errnum;
 };
 
-void NullCallback(const Napi::CallbackInfo& info)
-{
-}
-
-Napi::Function GetCallback(const Napi::CallbackInfo& info, uint32_t cb_arg)
-{
-    if (info.Length() > cb_arg)
-    {
-        Napi::Value cb = info[cb_arg];
-        if (cb.IsFunction())
-        {
-            return cb.As<Napi::Function>();
-        }
-    }
-
-    return Napi::Function::New(info.Env(), NullCallback);
-}
-
 void Getdents::Next(const Napi::CallbackInfo& info)
 {
     (new GetdentsAsyncWorker(this,
-							 GetCallback(info, 1),
+							 info[1].As<Napi::Function>(),
 							 info[0].As<Napi::Buffer<uint8_t>>()))
 		->Queue();
 }

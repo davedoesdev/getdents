@@ -42,7 +42,7 @@
     "chai": "~4.1.2",
     "nyc": "~11.1.0",
     "codecov": "~2.3.0",
-    "documentation": "~5.3.1"
+    "documentation": "~5.3.2"
   },
   "engines": {
     "node": ">=8.4.0"
