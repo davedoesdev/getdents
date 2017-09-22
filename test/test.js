@@ -32,26 +32,13 @@ function listdir(bufsize)
             fs.close(fd, cb);
         });
 
-        it('should be empty initially', function ()
-        {
-            let count = 0;
-            for (let _ of getdents)
-            {
-                count++;
-            }
-            expect(count).to.equal(0);
-        });
-
         it('should list files and directories (sync)', function ()
         {
             let entries = new Map();
 
-            while (getdents.moreSync())
+            for (const _ of getdents)
             {
-                for (let _ of getdents)
-                {
-                    entries.set(getdents.name(), getdents.type());
-                }
+                entries.set(getdents.name(), getdents.type());
             }
 
             expect(entries.size).to.equal(6);
@@ -63,33 +50,22 @@ function listdir(bufsize)
             expect(entries.get('..')).to.equal(Getdents.DT_DIR);
         });
 
-        it('should list files and directories (async)', function (cb)
+        it('should list files and directories (async)', async function ()
         {
             let entries = new Map();
 
-            getdents.more(function more(err, ended)
+            for await (const _ of getdents)
             {
-                if (err) { return cb(err); }
+                entries.set(getdents.name(), getdents.type());
+            }
 
-                if (ended)
-                {
-                    expect(entries.size).to.equal(6);
-                    expect(entries.get('one')).to.equal(Getdents.DT_REG);
-                    expect(entries.get('two')).to.equal(Getdents.DT_REG);
-                    expect(entries.get('three')).to.equal(Getdents.DT_REG);
-                    expect(entries.get('dir2')).to.equal(Getdents.DT_DIR);
-                    expect(entries.get('.')).to.equal(Getdents.DT_DIR);
-                    expect(entries.get('..')).to.equal(Getdents.DT_DIR);
-                    return cb();
-                }
-
-                for (let _ of this)
-                {
-                    entries.set(this.name(), this.type());
-                }
-
-                this.more(more);
-            });
+            expect(entries.size).to.equal(6);
+            expect(entries.get('one')).to.equal(Getdents.DT_REG);
+            expect(entries.get('two')).to.equal(Getdents.DT_REG);
+            expect(entries.get('three')).to.equal(Getdents.DT_REG);
+            expect(entries.get('dir2')).to.equal(Getdents.DT_DIR);
+            expect(entries.get('.')).to.equal(Getdents.DT_DIR);
+            expect(entries.get('..')).to.equal(Getdents.DT_DIR);
         });
 
         it('should throw error for invalid file descriptor', function ()
@@ -98,19 +74,30 @@ function listdir(bufsize)
 
             expect(function ()
             {
-                getdents.moreSync();
+                for (let _ of getdents)
+                {
+                }
             }).to.throw('getdents64 failed: Not a directory');
         });
 
-        it('should callback with error for invalid file descriptor', function (cb)
+        it('should callback with error for invalid file descriptor', async function ()
         {
             getdents.reset();
 
-            getdents.more(function (err)
+            let raised = false;
+            try
             {
-                expect(err.message).to.equal('getdents64 failed: Not a directory');
-                cb();
-            });
+                for await (const _ of getdents)
+                {
+                }
+            }
+            catch (ex)
+            {
+                expect(ex.message).to.equal('getdents64 failed: Not a directory');
+                raised = true;
+            }
+
+            expect(raised).to.be.true;
         });
     });
 }
