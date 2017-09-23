@@ -38,7 +38,7 @@ function listdir(bufsize)
 
             for (const _ of getdents)
             {
-                entries.set(getdents.name(), getdents.type());
+                entries.set(getdents.name, getdents.type);
             }
 
             expect(entries.size).to.equal(6);
@@ -56,7 +56,7 @@ function listdir(bufsize)
 
             for await (const _ of getdents)
             {
-                entries.set(getdents.name(), getdents.type());
+                entries.set(getdents.name, getdents.type);
             }
 
             expect(entries.size).to.equal(6);

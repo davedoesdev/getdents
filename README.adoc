@@ -1,0 +1,64 @@
+= getdents{nbsp}{nbsp}{nbsp}image:https://circleci.com/gh/davedoesdev/getdents.svg?style=svg[Build Status,link=https://circleci.com/gh/davedoesdev/getdents] image:https://codecov.io/gh/davedoesdev/getdents/branch/master/graph/badge.svg[Coverage Status,link=https://codecov.io/gh/davedoesdev/getdents] image:https://img.shields.io/npm/v/getdents.svg[NPM version,link=https://www.npmjs.com/package/getdents]
+:prewrap!:
+
+This is a Node.js module for calling https://linux.die.net/man/2/getdents64[`getdents64`]
+on Linux from Javascript.
+
+You might want to use this instead of `fs.readdir` if http://be-n.com/spw/you-can-list-a-million-files-in-a-directory-but-not-with-ls.html[you have a directory containing many files].
+
+API documentation is available http://rawgit.davedoesdev.com/davedoesdev/getdents/master/docs/index.html[here].
+
+== Example
+
+List regular files in `/tmp`:
+
+[source,javascript]
+----
+const fs = require('fs'),
+      assert = require('assert'),
+      Getdents = require('getdents').Getdents;
+
+fs.open('/tmp', 'r', async function (err, fd)
+{
+    assert.ifError(err);
+
+    let getdents = new Getdents(1024 * 1024, fd);
+
+    for await (let _ of getdents)
+    {
+        if (getdents.type() === Getdents.DT_REG)
+        {
+            console.log(getdents.name());
+        }
+    }
+});
+----
+
+== Install
+
+[source,bash]
+----
+npm install getdents
+----
+
+== Licence
+
+link:LICENCE[MIT]
+
+== Test
+
+[source,bash]
+----
+grunt test
+----
+
+== Coverage
+
+[source,bash]
+----
+grunt coverage
+----
+
+LCOV results are available http://rawgit.davedoesdev.com/davedoesdev/getdents/master/coverage/lcov-report/index.html[here].
+
+Codecov page is https://codecov.io/gh/davedoesdev/getdents[here].
