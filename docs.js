@@ -24,8 +24,8 @@ class Getdents
     /**
       Synchronously iterate over the entries in the directory (e.g. using
       `for-of`). The value of each iteration is always `undefined`. You'll need
-      to call {@link Getdents#type} and/or {@link Getdents#name} at each
-      iteration in order to extract information from the entry as required.
+      to read {@link Getdents#type|type} and/or {@link Getdents#name|name} at
+      each iteration in order to extract information from the entry as required.
      */
     *[Symbol.iterator]()
     {
@@ -34,9 +34,9 @@ class Getdents
     /**
       Asynchronously iterate over the entries in the directory (e.g. using
       `for-await-of`). The value of each iteration is always `undefined`.
-      You'll need to  call {@link Getdents#type} and/or {@link Getdents#name}
-      at each iteration in order to extract information from the entry
-      as required.
+      You'll need to read {@link Getdents#type|type} and/or
+      {@link Getdents#name|name} at each iteration in order to extract
+      information from the entry as required.
      */
     async *[Symbol.asyncIterator]()
     {

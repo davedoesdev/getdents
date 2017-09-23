@@ -718,8 +718,8 @@ with a configurable buffer size.</p>
 
   <p>Synchronously iterate over the entries in the directory (e.g. using
 <code>for-of</code>). The value of each iteration is always <code>undefined</code>. You'll need
-to call <a href="#getdentstype">Getdents#type</a> and/or <a href="#getdentsname">Getdents#name</a> at each
-iteration in order to extract information from the entry as required.</p>
+to read <a href="#getdentstype">type</a> and/or <a href="#getdentsname">name</a> at
+each iteration in order to extract information from the entry as required.</p>
 
 
   <div class='pre p1 fill-light mt0'>iterator()</div>
@@ -767,9 +767,9 @@ iteration in order to extract information from the entry as required.</p>
 
   <p>Asynchronously iterate over the entries in the directory (e.g. using
 <code>for-await-of</code>). The value of each iteration is always <code>undefined</code>.
-You'll need to  call <a href="#getdentstype">Getdents#type</a> and/or <a href="#getdentsname">Getdents#name</a>
-at each iteration in order to extract information from the entry
-as required.</p>
+You'll need to read <a href="#getdentstype">type</a> and/or
+<a href="#getdentsname">name</a> at each iteration in order to extract
+information from the entry as required.</p>
 
 
   <div class='pre p1 fill-light mt0'>asyncIterator()</div>
