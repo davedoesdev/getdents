@@ -9,7 +9,7 @@ public:
     Getdents(const Napi::CallbackInfo& info);
     ~Getdents();
 
-    static void Initialize(Napi::Env env, Napi::Object exports);
+    static Napi::Object Initialize(Napi::Env env, Napi::Object exports);
 
     void Next(const Napi::CallbackInfo& info);
     Napi::Value NextSync(const Napi::CallbackInfo& info);
@@ -133,7 +133,7 @@ void Getdents::SetFD(const Napi::CallbackInfo& info, const Napi::Value& value)
     fd = value.As<Napi::Number>();
 }
 
-void Getdents::Initialize(Napi::Env env, Napi::Object exports)
+Napi::Object Getdents::Initialize(Napi::Env env, Napi::Object exports)
 {
     exports.Set("Getdents", DefineClass(env, "Getdents",
     {
@@ -150,11 +150,13 @@ void Getdents::Initialize(Napi::Env env, Napi::Object exports)
         StaticValue("DT_UNKNOWN", Napi::Number::New(env, DT_UNKNOWN)),
         StaticValue("alignment", Napi::Number::New(env, __alignof__(struct dirent)))
     }));
+
+    return exports;
 }
 
-void Initialize(Napi::Env env, Napi::Object exports, Napi::Object module)
+Napi::Object Initialize(Napi::Env env, Napi::Object exports)
 {
-    Getdents::Initialize(env, exports);
+    return Getdents::Initialize(env, exports);
 }
 
 NODE_API_MODULE(getdents, Initialize)

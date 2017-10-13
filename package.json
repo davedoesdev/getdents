@@ -1,7 +1,7 @@
 {
   "name": "getdents",
   "description": "Call getdents(2) from Javscript",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/davedoesdev/getdents",
   "author": {
     "name": "David Halls",
@@ -31,7 +31,7 @@
   ],
   "dependencies": {
     "bindings": "~1.3.0",
-    "node-addon-api": "davedoesdev/node-addon-api#fix-objectwrap-crash"
+    "node-addon-api": "^1.0.0"
   },
   "devDependencies": {
     "grunt": "~1.0.1",
@@ -46,6 +46,6 @@
     "babel-eslint": "^8.0.0"
   },
   "engines": {
-    "node": ">=8.5.0"
+    "node": ">=8.7.0"
   }
 }
