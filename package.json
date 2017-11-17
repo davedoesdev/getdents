@@ -1,7 +1,7 @@
 {
   "name": "getdents",
   "description": "Call getdents(2) from Javscript",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/davedoesdev/getdents",
   "author": {
     "name": "David Halls",
@@ -37,13 +37,13 @@
     "grunt": "~1.0.1",
     "grunt-eslint": "~20.1.0",
     "grunt-exec": "~3.0.0",
-    "grunt-mocha-test": "~0.13.2",
-    "mocha": "~3.5.0",
+    "grunt-mocha-test": "~0.13.3",
+    "mocha": "~4.0.1",
     "chai": "~4.1.2",
-    "nyc": "~11.1.0",
-    "codecov": "~2.3.0",
-    "documentation": "~5.3.2",
-    "babel-eslint": "^8.0.0"
+    "nyc": "~11.3.0",
+    "codecov": "~3.0.0",
+    "documentation": "~5.3.3",
+    "babel-eslint": "^8.0.2"
   },
   "engines": {
     "node": ">=8.7.0"
