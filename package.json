@@ -1,7 +1,7 @@
 {
   "name": "getdents",
   "description": "Call getdents(2) from Javscript",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/davedoesdev/getdents",
   "author": {
     "name": "David Halls",
