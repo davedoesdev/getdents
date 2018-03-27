@@ -1,6 +1,6 @@
 const fs = require('fs'),
       assert = require('assert'),
-      Getdents = require('getdents').Getdents;
+      Getdents = require('..').Getdents;
 
 fs.open('/tmp', 'r', async function (err, fd)
 {
