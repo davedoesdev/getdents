@@ -26,9 +26,9 @@ fs.open('/tmp', 'r', async function (err, fd)
 
     for await (let _ of getdents)
     {
-        if (getdents.type() === Getdents.DT_REG)
+        if (getdents.type === Getdents.DT_REG)
         {
-            console.log(getdents.name());
+            console.log(getdents.name);
         }
     }
 });
