@@ -20,16 +20,16 @@ module.exports = function (grunt)
                 cmd: 'node-gyp build --debug'
             },
 
-			cover_build: {
+            cover_build: {
                 cmd: 'node-gyp rebuild --debug --coverage=true'
-			},
+            },
 
             cover_init: {
                 cmd: 'lcov --rc lcov_branch_coverage=0 --zerocounters --directory build && lcov --rc lcov_branch_coverage=0 --capture --init --directory build -o coverage/lcov_base.info'
             },
 
             cover: {
-                cmd: "./node_modules/.bin/nyc -x Gruntfile.js -x 'test/**' node --napi-modules --harmony-async-iteration ./node_modules/.bin/grunt test"
+                cmd: "./node_modules/.bin/nyc -x Gruntfile.js -x 'test/**' node --napi-modules ./node_modules/.bin/grunt test"
             },
 
             cover_lcov: {

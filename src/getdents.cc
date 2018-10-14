@@ -40,9 +40,20 @@ Getdents::~Getdents()
 Napi::Error ErrnoError(const Napi::Env& env, const int errnum, const char *msg)
 {
     char buf[1024] = {0};
+#if defined(__GLIBC__) && defined(_GNU_SOURCE)
     auto errmsg = strerror_r(errnum, buf, sizeof(buf));
     static_assert(std::is_same<decltype(errmsg), char*>::value,
                   "strerror_r must return char*");
+#else
+    char *errmsg = nullptr;
+    auto r = strerror_r(errnum, buf, sizeof(buf));
+    static_assert(std::is_same<decltype(r), int>::value,
+                  "strerror_r must return int");
+    if (r == 0)
+    {
+        errmsg = buf;
+    }
+#endif
     return Napi::Error::New(env,
         std::string(msg) + ": " + (errmsg ? errmsg : std::to_string(errnum)));
 }
