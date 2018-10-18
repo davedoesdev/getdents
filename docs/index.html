@@ -2,19 +2,20 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>getdents 1.0.1 | Documentation</title>
+  <title>getdents 1.0.4 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
   <link href='assets/github.css' type='text/css' rel='stylesheet' />
   <link href='assets/split.css' type='text/css' rel='stylesheet' />
+  <meta name='description' content='Call getdents(2) from Javscript'>
 </head>
 <body class='documentation m0'>
     <div class='flex'>
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>getdents</h3>
-          <div class='mb1'><code>1.0.1</code></div>
+          <div class='mb1'><code>1.0.4</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -138,7 +139,7 @@
       <div id='split-right' class='relative overflow-auto height-viewport-100'>
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -155,8 +156,10 @@
 directory. It calls <a href="https://linux.die.net/man/2/getdents64">getdents64</a>
 with a configurable buffer size.</p>
 
-
-  <div class='pre p1 fill-light mt0'>new Getdents(size: integer, fd: integer?)</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>new Getdents(size: integer, fd: integer?)</div>
+   
   
   
 
@@ -225,8 +228,10 @@ with a configurable buffer size.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>DT_BLK</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>DT_BLK</div>
+   
   
   
 
@@ -278,8 +283,10 @@ with a configurable buffer size.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>DT_CHR</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>DT_CHR</div>
+   
   
   
 
@@ -331,8 +338,10 @@ with a configurable buffer size.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>DT_DIR</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>DT_DIR</div>
+   
   
   
 
@@ -384,8 +393,10 @@ with a configurable buffer size.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>DT_FIFO</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>DT_FIFO</div>
+   
   
   
 
@@ -437,8 +448,10 @@ with a configurable buffer size.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>DT_LNK</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>DT_LNK</div>
+   
   
   
 
@@ -490,8 +503,10 @@ with a configurable buffer size.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>DT_REG</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>DT_REG</div>
+   
   
   
 
@@ -543,8 +558,10 @@ with a configurable buffer size.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>DT_SOCK</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>DT_SOCK</div>
+   
   
   
 
@@ -596,8 +613,10 @@ with a configurable buffer size.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>DT_UNKNOWN</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>DT_UNKNOWN</div>
+   
   
   
 
@@ -658,8 +677,10 @@ with a configurable buffer size.</p>
 
   <p>Set the directory to iterate.</p>
 
-
-  <div class='pre p1 fill-light mt0'>reset(fd: integer)</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>reset(fd: integer)</div>
+   
   
   
 
@@ -721,8 +742,10 @@ with a configurable buffer size.</p>
 to read <a href="#getdentstype">type</a> and/or <a href="#getdentsname">name</a> at
 each iteration in order to extract information from the entry as required.</p>
 
-
-  <div class='pre p1 fill-light mt0'>iterator()</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>iterator()</div>
+   
   
   
 
@@ -771,8 +794,10 @@ You'll need to read <a href="#getdentstype">type</a> and/or
 <a href="#getdentsname">name</a> at each iteration in order to extract
 information from the entry as required.</p>
 
-
-  <div class='pre p1 fill-light mt0'>asyncIterator()</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>asyncIterator()</div>
+   
   
   
 
@@ -816,8 +841,10 @@ information from the entry as required.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>type</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>type</div>
+   
   
   
 
@@ -872,8 +899,10 @@ information from the entry as required.</p>
   
 
   
-
-  <div class='pre p1 fill-light mt0'>name</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>name</div>
+   
   
   
 
@@ -891,7 +920,7 @@ information from the entry as required.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
         The filename of the current entry.
 
       
@@ -919,7 +948,6 @@ information from the entry as required.</p>
   
 </section>
 
-          
         
       </div>
     </div>
