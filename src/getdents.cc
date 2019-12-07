@@ -110,7 +110,6 @@ protected:
 
 		Callback().MakeCallback(
 			Receiver().Value(),
-			std::initializer_list<napi_value>
 			{
 				result < 0 ? GetdentsErrnoError(env, errnum).Value() : env.Null(),
 				Napi::Number::New(env, result)
