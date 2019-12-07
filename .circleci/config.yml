@@ -4,13 +4,13 @@ jobs:
     docker:
       - image: circleci/node:13.2.0-buster
         environment:
-          CXX: g++-6
+          CXX: g++-8
     steps:
       - checkout
       - run:
           name: install
           command: |
-            sudo apt-get -y install g++-6 lcov
+            sudo apt-get -y install g++-8 lcov
             npm install
       - run:
           name: coverage
