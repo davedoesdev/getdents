@@ -1,21 +1,21 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset='utf-8' />
-  <title>getdents 1.0.4 | Documentation</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
-  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
-  <link href='assets/style.css' type='text/css' rel='stylesheet' />
-  <link href='assets/github.css' type='text/css' rel='stylesheet' />
-  <link href='assets/split.css' type='text/css' rel='stylesheet' />
+  <meta charset='utf-8'>
+  <title>getdents 2.0.1 | Documentation</title>
   <meta name='description' content='Call getdents(2) from Javscript'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
 </head>
 <body class='documentation m0'>
     <div class='flex'>
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>getdents</h3>
-          <div class='mb1'><code>1.0.4</code></div>
+          <div class='mb1'><code>2.0.1</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -132,7 +132,7 @@
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
-            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
           </div>
         </div>
       </div>
@@ -156,10 +156,7 @@
 directory. It calls <a href="https://linux.die.net/man/2/getdents64">getdents64</a>
 with a configurable buffer size.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>new Getdents(size: integer, fd: integer?)</div>
-   
   
   
 
@@ -228,10 +225,7 @@ with a configurable buffer size.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>DT_BLK</div>
-   
   
   
 
@@ -265,6 +259,8 @@ with a configurable buffer size.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -283,10 +279,7 @@ with a configurable buffer size.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>DT_CHR</div>
-   
   
   
 
@@ -320,6 +313,8 @@ with a configurable buffer size.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -338,10 +333,7 @@ with a configurable buffer size.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>DT_DIR</div>
-   
   
   
 
@@ -375,6 +367,8 @@ with a configurable buffer size.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -393,10 +387,7 @@ with a configurable buffer size.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>DT_FIFO</div>
-   
   
   
 
@@ -430,6 +421,8 @@ with a configurable buffer size.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -448,10 +441,7 @@ with a configurable buffer size.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>DT_LNK</div>
-   
   
   
 
@@ -485,6 +475,8 @@ with a configurable buffer size.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -503,10 +495,7 @@ with a configurable buffer size.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>DT_REG</div>
-   
   
   
 
@@ -540,6 +529,8 @@ with a configurable buffer size.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -558,10 +549,7 @@ with a configurable buffer size.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>DT_SOCK</div>
-   
   
   
 
@@ -595,6 +583,8 @@ with a configurable buffer size.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -613,10 +603,7 @@ with a configurable buffer size.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>DT_UNKNOWN</div>
-   
   
   
 
@@ -639,6 +626,8 @@ with a configurable buffer size.</p>
 
       
     
+  
+
   
 
   
@@ -677,10 +666,7 @@ with a configurable buffer size.</p>
 
   <p>Set the directory to iterate.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>reset(fd: integer)</div>
-   
   
   
 
@@ -720,6 +706,8 @@ with a configurable buffer size.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -742,10 +730,7 @@ with a configurable buffer size.</p>
 to read <a href="#getdentstype">type</a> and/or <a href="#getdentsname">name</a> at
 each iteration in order to extract information from the entry as required.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>iterator()</div>
-   
   
   
 
@@ -754,6 +739,8 @@ each iteration in order to extract information from the entry as required.</p>
   
   
   
+  
+
   
 
   
@@ -794,10 +781,7 @@ You'll need to read <a href="#getdentstype">type</a> and/or
 <a href="#getdentsname">name</a> at each iteration in order to extract
 information from the entry as required.</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>asyncIterator()</div>
-   
   
   
 
@@ -806,6 +790,8 @@ information from the entry as required.</p>
   
   
   
+  
+
   
 
   
@@ -841,10 +827,7 @@ information from the entry as required.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>type</div>
-   
   
   
 
@@ -881,6 +864,8 @@ information from the entry as required.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -899,10 +884,7 @@ information from the entry as required.</p>
   
 
   
- 
-  
     <div class='pre p1 fill-light mt0'>name</div>
-   
   
   
 
@@ -936,6 +918,8 @@ information from the entry as required.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -946,8 +930,11 @@ information from the entry as required.</p>
   
 
   
+
+  
 </section>
 
+          
         
       </div>
     </div>

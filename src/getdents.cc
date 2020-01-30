@@ -65,7 +65,7 @@ Napi::Error GetdentsErrnoError(const Napi::Env& env, const int errnum)
 
 int Getdents::NextSync(uint8_t *dirp, unsigned int count)
 {
-	return syscall(SYS_getdents64, fd, dirp, count);
+    return syscall(SYS_getdents64, fd, dirp, count);
 }
 
 Napi::Value Getdents::NextSync(const Napi::CallbackInfo& info)

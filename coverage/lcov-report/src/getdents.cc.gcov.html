@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-12-07 08:03:48</td>
+            <td class="headerValue">2020-01-30 20:49:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -136,7 +136,7 @@
 <a name="65"><span class="lineNum">      65 </span>                :            : </a>
 <a name="66"><span class="lineNum">      66 </span>                :<span class="lineCov">         18 : int Getdents::NextSync(uint8_t *dirp, unsigned int count)</span></a>
 <a name="67"><span class="lineNum">      67 </span>                :            : {</a>
-<a name="68"><span class="lineNum">      68 </span>                :<span class="lineCov">         18 :         return syscall(SYS_getdents64, fd, dirp, count);</span></a>
+<a name="68"><span class="lineNum">      68 </span>                :<span class="lineCov">         18 :     return syscall(SYS_getdents64, fd, dirp, count);</span></a>
 <a name="69"><span class="lineNum">      69 </span>                :            : }</a>
 <a name="70"><span class="lineNum">      70 </span>                :            : </a>
 <a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">          9 : Napi::Value Getdents::NextSync(const Napi::CallbackInfo&amp; info)</span></a>
