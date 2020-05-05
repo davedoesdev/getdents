@@ -147,9 +147,9 @@ Napi::Object Getdents::Initialize(Napi::Env env, Napi::Object exports)
 {
     exports.Set("Getdents", DefineClass(env, "Getdents",
     {
-        InstanceMethod("next", &Getdents::Next),
-        InstanceMethod("nextSync", &Getdents::NextSync),
-        InstanceAccessor("fd", &Getdents::GetFD, &Getdents::SetFD),
+        InstanceMethod<&Getdents::Next>("next"),
+        InstanceMethod<&Getdents::NextSync>("nextSync"),
+        InstanceAccessor<&Getdents::GetFD, &Getdents::SetFD>("fd"),
         StaticValue("DT_BLK", Napi::Number::New(env, DT_BLK)),
         StaticValue("DT_CHR", Napi::Number::New(env, DT_CHR)),
         StaticValue("DT_DIR", Napi::Number::New(env, DT_DIR)),
