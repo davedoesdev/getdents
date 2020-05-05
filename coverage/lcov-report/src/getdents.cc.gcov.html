@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-01-30 20:49:25</td>
+            <td class="headerValue">2020-05-05 23:09:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -218,9 +218,9 @@
 <a name="147"><span class="lineNum">     147 </span>                :            : {</a>
 <a name="148"><span class="lineNum">     148 </span>                :<span class="lineCov">          1 :     exports.Set(&quot;Getdents&quot;, DefineClass(env, &quot;Getdents&quot;,</span></a>
 <a name="149"><span class="lineNum">     149 </span>                :            :     {</a>
-<a name="150"><span class="lineNum">     150 </span>                :<span class="lineCov">          1 :         InstanceMethod(&quot;next&quot;, &amp;Getdents::Next),</span></a>
-<a name="151"><span class="lineNum">     151 </span>                :<span class="lineCov">          1 :         InstanceMethod(&quot;nextSync&quot;, &amp;Getdents::NextSync),</span></a>
-<a name="152"><span class="lineNum">     152 </span>                :<span class="lineCov">          1 :         InstanceAccessor(&quot;fd&quot;, &amp;Getdents::GetFD, &amp;Getdents::SetFD),</span></a>
+<a name="150"><span class="lineNum">     150 </span>                :<span class="lineCov">          1 :         InstanceMethod&lt;&amp;Getdents::Next&gt;(&quot;next&quot;),</span></a>
+<a name="151"><span class="lineNum">     151 </span>                :<span class="lineCov">          1 :         InstanceMethod&lt;&amp;Getdents::NextSync&gt;(&quot;nextSync&quot;),</span></a>
+<a name="152"><span class="lineNum">     152 </span>                :<span class="lineCov">          1 :         InstanceAccessor&lt;&amp;Getdents::GetFD, &amp;Getdents::SetFD&gt;(&quot;fd&quot;),</span></a>
 <a name="153"><span class="lineNum">     153 </span>                :<span class="lineCov">          1 :         StaticValue(&quot;DT_BLK&quot;, Napi::Number::New(env, DT_BLK)),</span></a>
 <a name="154"><span class="lineNum">     154 </span>                :<span class="lineCov">          1 :         StaticValue(&quot;DT_CHR&quot;, Napi::Number::New(env, DT_CHR)),</span></a>
 <a name="155"><span class="lineNum">     155 </span>                :<span class="lineCov">          1 :         StaticValue(&quot;DT_DIR&quot;, Napi::Number::New(env, DT_DIR)),</span></a>
