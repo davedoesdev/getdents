@@ -1,7 +1,7 @@
 {
   "name": "getdents",
   "description": "Call getdents(2) from Javscript",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "homepage": "https://github.com/davedoesdev/getdents",
   "author": {
     "name": "David Halls",
@@ -42,7 +42,7 @@
     "chai": "^4.2.0",
     "nyc": "^15.0.1",
     "codecov": "^3.6.5",
-    "documentation": "^12.3.0",
+    "documentation": "^13.0.0",
     "babel-eslint": "^10.1.0"
   },
   "engines": {

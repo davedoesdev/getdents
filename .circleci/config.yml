@@ -1,17 +1,35 @@
 version: 2
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-14
+      - test-12
 jobs:
-  build:
+  test-14: &test-template
     docker:
-      - image: circleci/node:13.7.0-buster
-        environment:
-          CXX: g++-8
+      - image: circleci/node:14.2.0-buster
     steps:
       - checkout
       - run:
           name: install
           command: |
-            sudo apt-get -y install g++-8 lcov
+            echo 'deb http://deb.debian.org/debian testing main' | sudo tee /etc/apt/sources.list.d/testing.list > /dev/null
+            sudo apt -y update
+            sudo apt -y upgrade
+            sudo apt -y install lcov
             npm install
+      - run:
+          name: versions
+          command: |
+            gcc --version
+            gcov --version
+            lcov --version
+            node --version
       - run:
           name: coverage
           command: npm run ci-coverage
+  test-12:
+    <<: *test-template
+    docker:
+      - image: circleci/node:12.6.0-buster
