@@ -31,13 +31,13 @@
             <td class="headerValue">lcov_final.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">64</td>
-            <td class="headerCovTableEntry">64</td>
+            <td class="headerCovTableEntry">65</td>
+            <td class="headerCovTableEntry">65</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-08-07 20:08:53</td>
+            <td class="headerValue">2021-10-30 22:51:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -157,9 +157,9 @@
 <a name="86"><span class="lineNum">      86 </span>                :            :                         const Napi::Function&amp; callback,</a>
 <a name="87"><span class="lineNum">      87 </span>                :<span class="lineCov">          9 :                         const Napi::Buffer&lt;uint8_t&gt;&amp; buffer) :</span></a>
 <a name="88"><span class="lineNum">      88 </span>                :            :         Napi::AsyncWorker(callback),</a>
-<a name="89"><span class="lineNum">      89 </span>                :            :                 getdents(getdents), // getdents_ref keeps this around</a>
-<a name="90"><span class="lineNum">      90 </span>                :            :                 getdents_ref(Napi::Persistent(getdents-&gt;Value())),</a>
-<a name="91"><span class="lineNum">      91 </span>                :            :         buffer_ref(Napi::Persistent(buffer)),</a>
+<a name="89"><span class="lineNum">      89 </span>                :<span class="lineCov">          9 :                 getdents(getdents), // getdents_ref keeps this around</span></a>
+<a name="90"><span class="lineNum">      90 </span>                :<span class="lineCov">          9 :                 getdents_ref(Napi::Persistent(getdents-&gt;Value())),</span></a>
+<a name="91"><span class="lineNum">      91 </span>                :<span class="lineCov">          9 :         buffer_ref(Napi::Persistent(buffer)),</span></a>
 <a name="92"><span class="lineNum">      92 </span>                :<span class="lineCov">          9 :         dirp(buffer.Data()),</span></a>
 <a name="93"><span class="lineNum">      93 </span>                :<span class="lineCov">         18 :         count(buffer.Length())</span></a>
 <a name="94"><span class="lineNum">      94 </span>                :            :         {</a>
@@ -179,12 +179,12 @@
 <a name="108"><span class="lineNum">     108 </span>                :            :         {</a>
 <a name="109"><span class="lineNum">     109 </span>                :<span class="lineCov">          9 :                 Napi::Env env = Env();</span></a>
 <a name="110"><span class="lineNum">     110 </span>                :            : </a>
-<a name="111"><span class="lineNum">     111 </span>                :<span class="lineCov">          9 :                 Callback().MakeCallback(</span></a>
+<a name="111"><span class="lineNum">     111 </span>                :<span class="lineCov">         36 :                 Callback().MakeCallback(</span></a>
 <a name="112"><span class="lineNum">     112 </span>                :<span class="lineCov">          9 :                         Receiver().Value(),</span></a>
 <a name="113"><span class="lineNum">     113 </span>                :            :                         {</a>
 <a name="114"><span class="lineNum">     114 </span>                :<span class="lineCov">         11 :                                 result &lt; 0 ? GetdentsErrnoError(env, errnum).Value() : env.Null(),</span></a>
-<a name="115"><span class="lineNum">     115 </span>                :<span class="lineCov">          9 :                                 Napi::Number::New(env, result)</span></a>
-<a name="116"><span class="lineNum">     116 </span>                :<span class="lineCov">         27 :                         });</span></a>
+<a name="115"><span class="lineNum">     115 </span>                :<span class="lineCov">         18 :                                 Napi::Number::New(env, result)</span></a>
+<a name="116"><span class="lineNum">     116 </span>                :            :                         });</a>
 <a name="117"><span class="lineNum">     117 </span>                :<span class="lineCov">          9 :         }</span></a>
 <a name="118"><span class="lineNum">     118 </span>                :            : </a>
 <a name="119"><span class="lineNum">     119 </span>                :            : private: Getdents *getdents;</a>
@@ -230,7 +230,7 @@
 <a name="159"><span class="lineNum">     159 </span>                :<span class="lineCov">          1 :         StaticValue(&quot;DT_SOCK&quot;, Napi::Number::New(env, DT_SOCK)),</span></a>
 <a name="160"><span class="lineNum">     160 </span>                :<span class="lineCov">          1 :         StaticValue(&quot;DT_UNKNOWN&quot;, Napi::Number::New(env, DT_UNKNOWN)),</span></a>
 <a name="161"><span class="lineNum">     161 </span>                :<span class="lineCov">          1 :         StaticValue(&quot;alignment&quot;, Napi::Number::New(env, __alignof__(struct dirent)))</span></a>
-<a name="162"><span class="lineNum">     162 </span>                :<span class="lineCov">          1 :     }));</span></a>
+<a name="162"><span class="lineNum">     162 </span>                :            :     }));</a>
 <a name="163"><span class="lineNum">     163 </span>                :            : </a>
 <a name="164"><span class="lineNum">     164 </span>                :<span class="lineCov">          1 :     return exports;</span></a>
 <a name="165"><span class="lineNum">     165 </span>                :            : }</a>

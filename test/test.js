@@ -36,7 +36,7 @@ function listdir(bufsize)
         {
             let entries = new Map();
 
-            for (const _ of getdents)
+            for (const _ of getdents) // eslint-disable-line no-unused-vars
             {
                 entries.set(getdents.name, getdents.type);
             }
@@ -54,7 +54,7 @@ function listdir(bufsize)
         {
             let entries = new Map();
 
-            for await (const _ of getdents)
+            for await (const _ of getdents) // eslint-disable-line no-unused-vars
             {
                 entries.set(getdents.name, getdents.type);
             }
@@ -74,8 +74,8 @@ function listdir(bufsize)
 
             expect(function ()
             {
-                for (let _ of getdents)
-                {
+                for (let _ of getdents) // eslint-disable-line no-unused-vars
+                { // eslint-disable-line no-empty
                 }
             }).to.throw('getdents64 failed: Not a directory');
         });
@@ -87,8 +87,8 @@ function listdir(bufsize)
             let raised = false;
             try
             {
-                for await (const _ of getdents)
-                {
+                for await (const _ of getdents) // eslint-disable-line no-unused-vars
+                { // eslint-disable-line no-empty
                 }
             }
             catch (ex)

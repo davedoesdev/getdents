@@ -1,6 +1,14 @@
 module.exports = {
-    parser: 'babel-eslint',
-    parserOptions: {
-        ecmaVersion: 2017
+    "env": {
+        "node": true,
+        "commonjs": true,
+        "es2021": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 13
+    },
+    "rules": {
     }
 };

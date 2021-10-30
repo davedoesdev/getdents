@@ -1,5 +1,7 @@
 "use strict";
 
+const c8 = "npx c8 -x Gruntfile.js -x 'test/**'";
+
 module.exports = function (grunt)
 {
     grunt.initConfig(
@@ -20,6 +22,10 @@ module.exports = function (grunt)
                 cmd: 'node-gyp build --debug'
             },
 
+            rebuild: {
+                cmd: 'node-gyp rebuild --debug'
+            },
+
             cover_build: {
                 cmd: 'node-gyp rebuild --debug --coverage=true'
             },
@@ -29,11 +35,11 @@ module.exports = function (grunt)
             },
 
             cover: {
-                cmd: "./node_modules/.bin/nyc -x Gruntfile.js -x 'test/**' ./node_modules/.bin/grunt test"
+                cmd: `${c8} npx grunt test`
             },
 
             cover_lcov: {
-                cmd: "rm -f coverage/lcov.info && ./node_modules/.bin/nyc report -r lcovonly && rm -f coverage/lcov_addon.info && lcov --rc lcov_branch_coverage=0 --capture --directory build --output-file coverage/lcov_addon.info && rm -f coverage/lcov_combined.info && lcov --rc lcov_branch_coverage=1 --add-tracefile coverage/lcov.info --add-tracefile coverage/lcov_addon_base.info --add-tracefile coverage/lcov_addon.info --output-file coverage/lcov_combined.info && rm -f coverage/lcov_final.info && lcov --rc lcov_branch_coverage=1 --remove coverage/lcov_combined.info '/usr/*' $PWD'/node_modules/*' --output-file coverage/lcov_final.info"
+                cmd: `rm -f coverage/lcov.info && ${c8} report -r lcovonly && rm -f coverage/lcov_addon.info && lcov --rc lcov_branch_coverage=0 --capture --directory build --output-file coverage/lcov_addon.info && rm -f coverage/lcov_combined.info && lcov --rc lcov_branch_coverage=1 --add-tracefile coverage/lcov.info --add-tracefile coverage/lcov_addon_base.info --add-tracefile coverage/lcov_addon.info --output-file coverage/lcov_combined.info && rm -f coverage/lcov_final.info && lcov --rc lcov_branch_coverage=1 --remove coverage/lcov_combined.info '/usr/*' $PWD'/node_modules/*' --output-file coverage/lcov_final.info`
             },
 
             cover_report: {
@@ -47,17 +53,9 @@ module.exports = function (grunt)
                 cmd: "if [ \"$(lcov --rc lcov_branch_coverage=1 --list coverage/lcov_final.info | grep Total | grep -o '[0-9.]\\+%' | tr '\\n' ' ')\" != '100% 100% 100% ' ]; then exit 1; fi"
             },
 
-            codecov: {
-                cmd: './node_modules/.bin/codecov --disable=gcov -f coverage/lcov_final.info'
-            },
-
             documentation: {
-                cmd: './node_modules/.bin/documentation build -f html -o docs docs.js'
+                cmd: 'npx documentation build -f html -o docs docs.js'
             },
-
-            serve_documentation: {
-                cmd: './node_modules/.bin/documentation serve -w docs.js'
-            }
         }
     })
 
@@ -74,7 +72,5 @@ module.exports = function (grunt)
                                     'exec:cover_lcov',
                                     'exec:cover_report',
                                     'exec:cover_check']);
-    grunt.registerTask('codecov', 'exec:codecov');
     grunt.registerTask('docs', 'exec:documentation');
-    grunt.registerTask('serve_docs', 'exec:serve_documentation');
 };
