@@ -37,7 +37,8 @@ jobs:
       - name: Coverage
         run: npm run coverage
 
-      - name: Codecov
-        uses: codecov/codecov-action@v2
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
         with:
-          files: coverage/lcov_final.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage/lcov_final.info

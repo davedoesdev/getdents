@@ -61,4 +61,4 @@ grunt coverage
 
 LCOV results are available http://rawgit.davedoesdev.com/davedoesdev/getdents/master/coverage/lcov-report/index.html[here].
 
-Codecov page is https://codecov.io/gh/davedoesdev/getdents[here].
+Coveralls page is https://coveralls.io/r/davedoesdev/getdents[here].
